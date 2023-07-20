@@ -19,13 +19,13 @@ To use this script, follow these steps:
 1. Clone this repository using the following command:
 
    ````
-   git clone https://github.com/PrabhatNew/Kubernetes.git
+   git clone https://github.com/PrabhatNew/argocd-ha.git
    ````
 
 2. Change directory to the cloned repository:
 
    ````
-   cd Kubernetes/automated_scripts/argocd_HA
+   cd argocd_ha
 
 3. Update the `INGRESS_YAML` variables in the script to match the name of your `ingress.yaml` file.
 
