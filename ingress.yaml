@@ -1,0 +1,50 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-http-ingress
+  namespace: argocd
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"nginx.ingress.kubernetes.io/backend-protocol":"HTTP","nginx.ingress.kubernetes.io/force-ssl-redirect":"true"},"name":"argocd-server-http-ingress","namespace":"default"},"spec":{"ingressClassName":"nginx","rules":[{"host":"devargo.vianet.com.np","http":{"paths":[{"backend":{"service":{"name":"argocd-server","port":{"name":"http"}}},"path":"/","pathType":"Prefix"}]}}],"tls":[{"hosts":["devargo.vianet.com.np"],"secretName":"argocd-secret"}]}}
+    #nginx.ingress.kubernetes.io/backend-protocol: HTTP
+   # nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: networking.k8s.io/v1
+      time: '2023-07-13T08:01:19Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+            f:nginx.ingress.kubernetes.io/backend-protocol: {}
+            f:nginx.ingress.kubernetes.io/force-ssl-redirect: {}
+        f:spec:
+          f:ingressClassName: {}
+          f:rules: {}
+          f:tls: {}
+  selfLink: >-
+    /apis/networking.k8s.io/v1/namespaces/default/ingresses/argocd-server-http-ingress
+status:
+  loadBalancer: {}
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - devargo.vianet.com.np
+      secretName: argocd-secret
+  rules:
+    - host: devargo.vianet.com.np
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                port:
+                  name: https
